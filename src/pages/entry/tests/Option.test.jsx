@@ -1,7 +1,7 @@
-import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import { render, screen } from '../../../test-utils/testing-library-utils';
 
 import Options from '../Options';
+import { OrderDetailsProvider } from '../../../contexts/OrderDetails';
 
 test('displays image for each scoop option from server', async () => {
   render(<Options optionType="scoops" />);
@@ -11,7 +11,6 @@ test('displays image for each scoop option from server', async () => {
   expect(scoopImages).toHaveLength(2);
 
   // confirm alt text of images
-  // @ts-ignore
   const altText = scoopImages.map((element) => element.alt);
   expect(altText).toEqual(['Chocolate scoop', 'Vanilla scoop']);
 });
