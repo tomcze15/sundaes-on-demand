@@ -20,4 +20,7 @@ export const handlers = [
       ])
     );
   }),
+  rest.post(BASE_URL + 'order', (req, res, ctx) => {
+    return res(ctx.json({ orderNumber: 123456789 }));
+  }),
 ];

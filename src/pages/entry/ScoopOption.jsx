@@ -6,8 +6,19 @@ import Row from 'react-bootstrap/Row';
 const BASE_URL = 'http://localhost:3030/';
 
 export default function ScoopOptions({ name, imagePath, updateItemCount }) {
+  const [isValid, setIsValid] = useState(true);
+
   const handleChange = (event) => {
-    updateItemCount(name, event.target.value);
+    const currentValue = event.target.value;
+    updateItemCount(name, currentValue);
+
+    const currentValueFloat = parseFloat(currentValue);
+
+    setIsValid(
+      0 <= currentValueFloat &&
+        currentValueFloat <= 10 &&
+        Math.floor(currentValueFloat) === currentValueFloat
+    );
   };
 
   return (
@@ -26,7 +37,12 @@ export default function ScoopOptions({ name, imagePath, updateItemCount }) {
           {name}
         </Form.Label>
         <Col xs="5" style={{ textAlign: 'left' }} />
-        <Form.Control type="number" defaultValue={0} onChange={handleChange} />
+        <Form.Control
+          type="number"
+          defaultValue={0}
+          onChange={handleChange}
+          isInvalid={!isValid}
+        />
       </Form.Group>
     </Col>
   );
